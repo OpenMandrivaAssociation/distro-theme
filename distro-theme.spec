@@ -8,7 +8,7 @@
 %bcond_with moondrake
 
 Name:		distro-theme
-Version:	1.4.39
+Version:	1.4.40
 Release:	1
 Url:		https://abf.io/software/distro-theme
 Source0:	%{name}-%{version}.tar.xz

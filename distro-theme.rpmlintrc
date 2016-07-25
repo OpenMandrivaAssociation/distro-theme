@@ -1,1 +1,0 @@
-addFilter('distro-theme.src.* use-of-RPM_SOURCE_DIR')

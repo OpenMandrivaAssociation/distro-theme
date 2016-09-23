@@ -49,7 +49,7 @@ if [ -f %{mdk_bg}/"""+Vendor+"""-root.png -a ! -f %{mdk_bg}/root/default.png -o 
   ln -s """+Vendor+"""-root-1600x1200.png %{mdk_bg}/root/default.png
 fi"""))
     if bg_res:
-	print(rpm.expandMacro("""
+        print(rpm.expandMacro("""
 if [ -f %{mdk_bg}/"""+Vendor+"""-"""+bg_res+""".jpg -a ! -f %{mdk_bg}/default.jpg -o -L %{mdk_bg}/default.jpg ]; then
   rm -f %{mdk_bg}/default.jpg
   ln -s """+Vendor+"""-"""+bg_res+""".png %{mdk_bg}/default.jpg
@@ -60,7 +60,7 @@ if [ -f %{mdk_bg}/"""+Vendor+"""-"""+bg_res+""".png -a ! -f %{mdk_bg}/default.pn
   ln -s """+Vendor+"""-"""+bg_res+""".png %{mdk_bg}/default.png
 fi"""))
     if bg_ratio:
-	print(rpm.expandMacro("""
+        print(rpm.expandMacro("""
 if [ -f %{mdk_bg}/"""+Vendor+"""-"""+bg_ratio+""".png -a ! -f %{mdk_bg}/default.png -o -L %{mdk_bg}/default.png ]; then
   rm -f %{mdk_bg}/default.png
   ln -s """+Vendor+"""-"""+bg_ratio+""".png %{mdk_bg}/default.png
@@ -120,8 +120,8 @@ fi
     if type(files) == str:
         print(rpm.expandMacro(files))
     elif type(files) == tuple or type(files) == list:
-	for filename in files:
-	    print(rpm.expandMacro(filename))
+        for filename in files:
+            print(rpm.expandMacro(filename))
 
     # this isn't the niftiest, but if anyone else wants to add any similar,
     # vendor specific stuff, feel free to provide this with a more generic
@@ -173,8 +173,8 @@ This package contains the """+Vendor+""" screensaver.
     if type(files) == str:
         print rpm.expandMacro("%{_datadir}/mdk/screensaver/"+files)
     elif type(files) == tuple or type(files) == list:
-	for filename in files:
-	    print rpm.expandMacro("%{_datadir}/mdk/screensaver/"+filename)
+        for filename in files:
+            print rpm.expandMacro("%{_datadir}/mdk/screensaver/"+filename)
 
 def boot_theme(Vendor):
     vendor = Vendor.lower()

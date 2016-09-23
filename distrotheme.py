@@ -17,7 +17,9 @@ Conflicts:	kdebase-konsole <= 1:3.4.2-37mdk
 Conflicts:	grub2 < 2.00-23
 Requires(post):	bootsplash >= 3.4.1-13
 %if %product_product == "OpenMandriva"
+%if %{with grub}
 Requires:	distro-theme-OpenMandriva-grub2
+%endif
 Requires:	distro-theme-OpenMandriva-screensaver
 %endif
 %ifarch x86_64 %{ix86}

@@ -14,7 +14,7 @@
 
 Name:		distro-theme
 Version:	1.4.40
-Release:	2
+Release:	3
 Url:		https://abf.io/software/distro-theme
 Source0:	%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc

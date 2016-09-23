@@ -111,7 +111,9 @@ fi
 
 %files """+Vendor+"""
 %{_datadir}/plymouth/themes/"""+Vendor+"""
+%if %{with grub}
 %{_datadir}/gfxboot/themes/"""+Vendor+"""
+%endif
 %{mdk_bg}/"""+Vendor+"*"))
     if opaque:
         print rpm.expandMacro("""
@@ -179,6 +181,7 @@ This package contains the """+Vendor+""" screensaver.
 def boot_theme(Vendor):
     vendor = Vendor.lower()
     print(rpm.expandMacro("""
+%if %{with grub}
 %package	"""+Vendor+"""-grub2
 Summary:	Provides a graphical theme with a custom """+Vendor+""" background for grub2
 Group:		Graphics
@@ -220,15 +223,18 @@ fi
 %files """+Vendor+"""-grub2
 %dir /boot/grub2/themes/"""+Vendor+"""
 /boot/grub2/themes/"""+Vendor+"""/*
-%{_sysconfdir}/default/grub."""+Vendor))
+%{_sysconfdir}/default/grub."""+Vendor+"""
+%endif"""))
 
 def grub2conf(Vendor, Distribution):
     print(rpm.expandMacro("""
+%if %{with grub}
 install -d %{buildroot}%{_sysconfdir}/default/
 cat > %{buildroot}%{_sysconfdir}/default/grub."""+Vendor+""" << EOF
 GRUB_THEME=/boot/grub2/themes/"""+Vendor+"""/theme.txt
 GRUB_BACKGROUND=/boot/grub2/themes/"""+Vendor+"""/terminal_background.png
 GRUB_DISTRIBUTOR=\""""+Distribution+"""\"
+%endif
 EOF"""))
 
 

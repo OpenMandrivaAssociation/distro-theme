@@ -6,14 +6,20 @@
 %define debug_package %{nil}
 
 %bcond_with moondrake
+%ifarch %armx
+%bcond_with grub
+%else
+%bcond_without grub
+%endif
 
 Name:		distro-theme
 Version:	1.4.40
-Release:	1
+Release:	2
 Url:		https://abf.io/software/distro-theme
 Source0:	%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
 Source2:	distrotheme.py
+Patch0:		distro-theme-no-grub.patch
 License:	GPLv2+
 BuildRequires:	imagemagick
 BuildRequires:	gimp
@@ -75,23 +81,32 @@ complete Moondrake theme throughout the distribution.
 
 %{python:distrotheme.theme_package("OpenMandriva", "OpenMandriva Lx", files=distrotheme.extra_files("%{_iconsdir}/*.*g"), bg_res=None, bg_ratio="16x9")}
 %{python:distrotheme.screensaver_package("OpenMandriva", "energy*.jpg")}
+%if %{with grub}
 %{python:distrotheme.boot_theme("OpenMandriva")}
+%endif
 
 %prep
 %setup -q
+%apply_patches
 
 %build
+%if !%{with grub}
+NO_GRUB=true
+%endif
 %if !%{with moondrake}
-%make THEMES=OpenMandriva
+%make THEMES=OpenMandriva NO_GRUB="$NO_GRUB"
 %else
-%make
+%make NO_GRUB="$NO_GRUB"
 %endif
 
 %install
+%if !%{with grub}
+NO_GRUB=true
+%endif
 %if !%{with moondrake}
-%makeinstall_std THEMES=OpenMandriva
+%makeinstall_std THEMES=OpenMandriva NO_GRUB="$NO_GRUB"
 %else
-%makeinstall_std
+%makeinstall_std NO_GRUB="$NO_GRUB"
 %endif
 
 # Default wallpaper should be available without browsing file system
@@ -99,11 +114,13 @@ mkdir -p %{buildroot}%{_datadir}/wallpapers
 ln -sf /usr/share/mdk/backgrounds/default.png %{buildroot}%{_datadir}/wallpapers/default.png
 ln -sf /usr/share/mdk/backgrounds/default.png %{buildroot}%{_datadir}/wallpapers/default.jpg
 
+%if %{with grub}
 %if %{with moondrake}
 touch %{buildroot}%{_datadir}/wallpapers/default-opaque.{png,jpg}
 %{python:distrotheme.grub2conf("Moondrake", "Moondrake GNU/Linux")}
 %endif
 %{python:distrotheme.grub2conf("OpenMandriva", "OpenMandriva Lx")}
+%endif
 
 %files common
 %doc doc/*

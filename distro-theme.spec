@@ -1,6 +1,3 @@
-%{python:import sys; sys.path.append(rpm.expandMacro("%{_sourcedir}"))}
-%{python:import distrotheme}
-
 %define scriptdir %{_datadir}/bootsplash/scripts
 %define mdk_bg	%{_datadir}/mdk/backgrounds
 %define debug_package %{nil}
@@ -14,11 +11,14 @@
 
 Name:		distro-theme
 Version:	1.4.40
-Release:	3
+Release:	4
 Url:		https://abf.io/software/distro-theme
 Source0:	%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
-Source2:	distrotheme.py
+Source100:	generate-theme-package.sh
+Source101:	generate-screensaver-package.sh
+Source102:	generate-grub-package.sh
+Source103:	generate-grub-config.sh
 Patch0:		distro-theme-no-grub.patch
 License:	GPLv2+
 BuildRequires:	imagemagick
@@ -33,6 +33,7 @@ BuildRequires:	pngrewrite
 BuildRequires:	fonts-ttf-dejavu
 BuildRequires:	fonts-ttf-droid
 BuildRequires:	fonts-ttf-gliphmaker.com
+BuildRequires:	distro-release-OpenMandriva
 
 %description
 This package contains the plymouth themes with its images and configuration
@@ -74,15 +75,16 @@ Suggests:	distro-xfce-config-Moondrake
 This package simply pulls in all the various packages that makes up the
 complete Moondrake theme throughout the distribution.
 
-%{python:distrotheme.theme_package("Moondrake", "Moondrake GNU/Linux", bg_ratio=None, bg_res="1920x1440", opaque="Moondrake-tux-1920x1440-opaque.png")}
-%{python:distrotheme.screensaver_package("Moondrake", "*-TUX.png")}
-%{python:distrotheme.boot_theme("Moondrake")}
+%{expand:%(sh %{S:100} Moondrake "Moondrake GNU/Linux" "" "1920x1440" "Moondrake-tux-1920x1440-opaque.png")}
+%{expand:%(sh %{S:101} Moondrake *-TUX.png)}
+%{expand:%(sh %{S:102} Moondrake)}
 %endif
 
-%{python:distrotheme.theme_package("OpenMandriva", "OpenMandriva Lx", files=distrotheme.extra_files("%{_iconsdir}/*.*g"), bg_res=None, bg_ratio="16x9")}
-%{python:distrotheme.screensaver_package("OpenMandriva", "energy*.jpg")}
+%{expand:%(sh %{S:100} OpenMandriva "OpenMandriva Lx" "16x9")}
+%{_iconsdir}/*.*
+%{expand:%(sh %{S:101} OpenMandriva energy*.jpg)}
 %if %{with grub}
-%{python:distrotheme.boot_theme("OpenMandriva")}
+%{expand:%(sh %{S:102} OpenMandriva)}
 %endif
 
 %prep
@@ -93,6 +95,7 @@ complete Moondrake theme throughout the distribution.
 %if !%{with grub}
 NO_GRUB=true
 %endif
+pwd
 %if !%{with moondrake}
 %make THEMES=OpenMandriva NO_GRUB="$NO_GRUB"
 %else
@@ -117,9 +120,9 @@ ln -sf /usr/share/mdk/backgrounds/default.png %{buildroot}%{_datadir}/wallpapers
 %if %{with grub}
 %if %{with moondrake}
 touch %{buildroot}%{_datadir}/wallpapers/default-opaque.{png,jpg}
-%{python:distrotheme.grub2conf("Moondrake", "Moondrake GNU/Linux")}
+%{expand:%(sh %{S:103} "Moondrake" "Moondrake GNU/Linux")}
 %endif
-%{python:distrotheme.grub2conf("OpenMandriva", "OpenMandriva Lx")}
+%{expand:%(sh %{S:103} "OpenMandriva" "OpenMandriva Lx")}
 %endif
 
 %files common
@@ -132,9 +135,10 @@ touch %{buildroot}%{_datadir}/wallpapers/default-opaque.{png,jpg}
 %endif
 
 %files extra
-%{python:distrotheme.extra_files(start=12, stop=77,strfmt="%{mdk_bg}/flavor_of_freedom-%%.2d.jpg", printOut=True)}
+%(for i in $(seq 12 76); do
+	echo "%{mdk_bg}/flavor_of_freedom-$i.jpg"
+done)
 
 %if %{with moondrake}
 %files -n complete-moondrake-theme
 %endif
-

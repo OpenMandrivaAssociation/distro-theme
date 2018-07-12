@@ -9,7 +9,7 @@ Summary:	Provides a graphical theme with a custom ${VENDOR} background for grub2
 Group:		Graphics
 Conflicts:	distro-theme-${VENDOR} < 1.4.29-2
 Requires:	grub2
-Requires(post,postun): update-alternatives
+Requires(post,postun): chkconfig
 Requires(post):	grub2
 Requires(post):	sed
 Provides:	grub2-theme = %{EVRD}

@@ -1,5 +1,5 @@
 %define scriptdir %{_datadir}/bootsplash/scripts
-%define mdk_bg	%{_datadir}/mdk/backgrounds
+%define mdk_bg %{_datadir}/mdk/backgrounds
 %define debug_package %{nil}
 
 %ifarch %armx
@@ -9,9 +9,9 @@
 %endif
 
 Name:		distro-theme
-Version:	1.4.40
-Release:	6
-Summary:	Distribution plymouth theme
+Version:	1.4.41
+Release:	1
+Summary:	Distribution themes
 Url:		https://abf.io/software/distro-theme
 Source0:	%{name}-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
@@ -36,19 +36,18 @@ BuildRequires:	fonts-ttf-gliphmaker.com
 BuildRequires:	distro-release-OpenMandriva
 
 %description
-This package contains the plymouth themes with its images and configuration
+This package contains the themes with its images and configuration
 for different resolution as well as the desktop background image for different
 distributions supported.
 
 %package	common
-Summary:	%{vendor} common theme for plymouth
+Summary:	%{vendor} common theme
 Group:		Graphics
 Obsoletes:	plymouth-theme-mdv
 %rename		mandriva-theme-common
 
 %description	common
-This package contains common images for the %{vendor}
-plymouth themes.
+This package contains common images for the %{vendor} themes.
 
 %package	extra
 Summary:	Additional backgrounds from OpenMandriva LX users
@@ -76,14 +75,14 @@ NO_GRUB=true
 %endif
 pwd
 
-%make THEMES=OpenMandriva NO_GRUB="$NO_GRUB"
+%make_build THEMES=OpenMandriva NO_GRUB="$NO_GRUB"
 
 %install
 %if !%{with grub}
 NO_GRUB=true
 %endif
 
-%makeinstall_std THEMES=OpenMandriva NO_GRUB="$NO_GRUB"
+%make_install THEMES=OpenMandriva NO_GRUB="$NO_GRUB"
 
 # Default wallpaper should be available without browsing file system
 mkdir -p %{buildroot}%{_datadir}/wallpapers

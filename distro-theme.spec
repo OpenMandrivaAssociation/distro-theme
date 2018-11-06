@@ -10,7 +10,7 @@
 
 Name:		distro-theme
 Version:	1.4.41
-Release:	2
+Release:	3
 Summary:	Distribution themes
 Url:		https://abf.io/software/distro-theme
 Source0:	%{name}-%{version}.tar.xz

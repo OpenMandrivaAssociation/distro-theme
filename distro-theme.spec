@@ -19,7 +19,6 @@ Source100:	generate-theme-package.sh
 Source101:	generate-screensaver-package.sh
 Source102:	generate-grub-package.sh
 Source103:	generate-grub-config.sh
-Patch0:		distro-theme-no-grub.patch
 License:	GPLv2+
 BuildRequires:	imagemagick
 BuildRequires:	gimp
@@ -66,8 +65,7 @@ background contest.
 %endif
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
 %if !%{with grub}

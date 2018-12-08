@@ -12,7 +12,7 @@ Name:		distro-theme
 Version:	1.4.41
 Release:	4
 Summary:	Distribution themes
-Url:		https://abf.io/software/distro-theme
+Url:		https://github.com/OpenMandrivaSoftware/distro-theme
 Source0:	%{name}-%{version}.tar.xz
 Source1:	OM4-splash.tar.gz
 Source10:	%{name}.rpmlintrc

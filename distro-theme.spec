@@ -2,7 +2,12 @@
 %define mdk_bg %{_datadir}/mdk/backgrounds
 %define debug_package %{nil}
 
+# Not armx -- aarch64 has UEFI and can run grub
+%ifarch %{arm}
+%bcond_with grub
+%else
 %bcond_without grub
+%endif
 
 Name:		distro-theme
 Version:	1.4.41

@@ -2,11 +2,7 @@
 %define mdk_bg %{_datadir}/mdk/backgrounds
 %define debug_package %{nil}
 
-%ifarch %armx
-%bcond_with grub
-%else
 %bcond_without grub
-%endif
 
 Name:		distro-theme
 Version:	1.4.41

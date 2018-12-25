@@ -26,7 +26,7 @@ BuildRequires:	imagemagick
 BuildRequires:	gimp
 BuildRequires:	gimp-python
 BuildRequires:	python2-cairo
-%ifnarch %armx
+%ifnarch %arm
 BuildRequires:	grub2-extra
 %endif
 BuildRequires:	pngcrush

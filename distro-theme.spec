@@ -92,6 +92,8 @@ ln -sf /usr/share/mdk/backgrounds/default.png %{buildroot}%{_datadir}/wallpapers
 
 %if %{with grub}
 %{expand:%(sh %{S:103} "OpenMandriva" "OpenMandriva Lx")}
+%else
+rm -rf %{buildroot}/boot
 %endif
 
 mkdir -p %{buildroot}%{_datadir}/plasma/look-and-feel

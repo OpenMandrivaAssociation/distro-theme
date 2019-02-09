@@ -10,11 +10,11 @@
 %endif
 
 Name:		distro-theme
-Version:	1.4.41
-Release:	4
+Version:	1.4.42
+Release:	1
 Summary:	Distribution themes
 Url:		https://github.com/OpenMandrivaSoftware/distro-theme
-Source0:	%{name}-%{version}.tar.xz
+Source0:	https://github.com/OpenMandrivaSoftware/distro-theme/archive/v%{version}.tar.gz
 Source1:	OM4-splash.tar.gz
 Source10:	%{name}.rpmlintrc
 Source100:	generate-theme-package.sh

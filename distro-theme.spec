@@ -99,6 +99,10 @@ rm -rf %{buildroot}/boot
 mkdir -p %{buildroot}%{_datadir}/plasma/look-and-feel
 mv OM4-splash/* %{buildroot}%{_datadir}/plasma/look-and-feel
 
+%if !%{with grub}
+rm -rf %{buildroot}%{_sysconfdir}/grub.d
+%endif
+
 %files common
 %doc doc/*
 %{_datadir}/wallpapers/default.jpg

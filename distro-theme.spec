@@ -32,7 +32,7 @@ BuildRequires:	grub2-extra
 BuildRequires:	pngcrush
 BuildRequires:	pngrewrite
 BuildRequires:	fonts-ttf-dejavu
-BuildRequires:	fonts-ttf-droid
+BuildRequires:  unifont-fonts
 BuildRequires:	fonts-ttf-gliphmaker.com
 BuildRequires:	distro-release-OpenMandriva
 

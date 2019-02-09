@@ -45,6 +45,7 @@ fi
 %files ${VENDOR}-grub2
 %dir /boot/grub2/themes/${VENDOR}
 /boot/grub2/themes/${VENDOR}/*
+%{_sysconfdir}/grub.d/*
 %{_sysconfdir}/default/grub.${VENDOR}
 %endif
 EOF

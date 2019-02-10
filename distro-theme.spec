@@ -10,7 +10,7 @@
 %endif
 
 Name:		distro-theme
-Version:	1.4.42
+Version:	1.4.43
 Release:	1
 Summary:	Distribution themes
 Url:		https://github.com/OpenMandrivaSoftware/distro-theme

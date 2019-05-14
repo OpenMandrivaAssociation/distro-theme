@@ -10,12 +10,11 @@
 %endif
 
 Name:		distro-theme
-Version:	1.4.44
+Version:	1.4.45
 Release:	1
 Summary:	Distribution themes
 Url:		https://github.com/OpenMandrivaSoftware/distro-theme
 Source0:	https://github.com/OpenMandrivaSoftware/distro-theme/archive/v%{version}.tar.gz
-Source1:	OM4-splash.tar.gz
 Source10:	%{name}.rpmlintrc
 Source100:	generate-theme-package.sh
 Source101:	generate-screensaver-package.sh
@@ -68,7 +67,7 @@ background contest.
 %endif
 
 %prep
-%autosetup -p1 -a 1
+%autosetup -p1
 
 %build
 %if !%{with grub}
@@ -97,7 +96,7 @@ rm -rf %{buildroot}/boot
 %endif
 
 mkdir -p %{buildroot}%{_datadir}/plasma/look-and-feel
-mv OM4-splash/* %{buildroot}%{_datadir}/plasma/look-and-feel
+mv OpenMandriva/splash %{buildroot}%{_datadir}/plasma/look-and-feel/org.openmandriva4.desktop
 
 %if !%{with grub}
 rm -rf %{buildroot}%{_sysconfdir}/grub.d

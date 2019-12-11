@@ -11,7 +11,7 @@
 
 Name:		distro-theme
 Version:	1.4.45
-Release:	1
+Release:	2
 Summary:	Distribution themes
 Url:		https://github.com/OpenMandrivaSoftware/distro-theme
 Source0:	https://github.com/OpenMandrivaSoftware/distro-theme/archive/v%{version}.tar.gz

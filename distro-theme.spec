@@ -60,6 +60,7 @@ background contest.
 
 %{expand:%(sh %{S:100} OpenMandriva "OpenMandriva Lx" "16x9")}
 %{_iconsdir}/*.*
+%{_iconsdir}/hicolor/*/apps/*.*
 %{_datadir}/plasma/look-and-feel/org.openmandriva4.desktop
 %{expand:%(sh %{S:101} OpenMandriva energy*.jpg)}
 %if %{with grub}
@@ -83,6 +84,14 @@ NO_GRUB=true
 %endif
 
 %make_install THEMES=OpenMandriva NO_GRUB="$NO_GRUB"
+
+# Make sure the logo can be found where modern applications expect it
+mkdir -p %{buildroot}%{_iconsdir}/hicolor/scalable/apps
+cp %{buildroot}%{_iconsdir}/openmandriva.svg %{buildroot}%{_iconsdir}/hicolor/scalable/apps/
+for i in 16 22 24 32 36 48 64 72 96 128 192 256 512; do
+	mkdir -p %{buildroot}%{_iconsdir}/hicolor/${i}x${i}/apps
+	convert %{buildroot}%{_iconsdir}/openmandriva.svg %{buildroot}%{_iconsdir}/hicolor/${i}x${i}/apps/openmandriva.png
+done
 
 # Default wallpaper should be available without browsing file system
 mkdir -p %{buildroot}%{_datadir}/wallpapers

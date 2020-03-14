@@ -163,5 +163,6 @@ cat <<EOF
 %{_datadir}/plymouth/themes/${VENDOR}
 %optional %{_datadir}/gfxboot/themes/${VENDOR}
 %{mdk_bg}/${VENDOR}*
+%optional %{_datadir}/pixmaps/system-logo-white.png
 EOF
 

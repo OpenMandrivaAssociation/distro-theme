@@ -11,7 +11,7 @@
 
 Name:		distro-theme
 Version:	1.4.46.1
-Release:	1
+Release:	2
 Summary:	Distribution themes
 Url:		https://github.com/OpenMandrivaSoftware/distro-theme
 Source0:	https://github.com/OpenMandrivaSoftware/distro-theme/archive/v%{version}.tar.gz
@@ -87,7 +87,7 @@ mkdir -p %{buildroot}%{_iconsdir}/hicolor/scalable/apps
 cp %{buildroot}%{_iconsdir}/openmandriva.svg %{buildroot}%{_iconsdir}/hicolor/scalable/apps/
 for i in 16 22 24 32 36 48 64 72 96 128 192 256 512; do
 	mkdir -p %{buildroot}%{_iconsdir}/hicolor/${i}x${i}/apps
-	convert %{buildroot}%{_iconsdir}/openmandriva.svg %{buildroot}%{_iconsdir}/hicolor/${i}x${i}/apps/openmandriva.png
+	convert -background none %{buildroot}%{_iconsdir}/openmandriva.svg %{buildroot}%{_iconsdir}/hicolor/${i}x${i}/apps/openmandriva.png
 done
 
 # Default wallpaper should be available without browsing file system

@@ -22,16 +22,13 @@ Source102:	generate-grub-package.sh
 Source103:	generate-grub-config.sh
 License:	GPLv2+
 BuildRequires:	imagemagick
-BuildRequires:	gimp
-BuildRequires:	gimp-python
-BuildRequires:	python-cairo
 %ifnarch %arm
 BuildRequires:	grub2-extra
 %endif
 BuildRequires:	pngcrush
 BuildRequires:	pngrewrite
 BuildRequires:	fonts-ttf-dejavu
-BuildRequires:  unifont-fonts
+BuildRequires:	unifont-fonts
 BuildRequires:	fonts-ttf-gliphmaker.com
 BuildRequires:	distro-release-OpenMandriva
 

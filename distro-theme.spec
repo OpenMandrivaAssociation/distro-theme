@@ -24,7 +24,7 @@ License:	GPLv2+
 BuildRequires:	imagemagick
 BuildRequires:	gimp
 BuildRequires:	gimp-python
-BuildRequires:	python2-cairo
+BuildRequires:	python-cairo
 %ifnarch %arm
 BuildRequires:	grub2-extra
 %endif
